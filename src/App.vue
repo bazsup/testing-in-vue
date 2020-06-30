@@ -1,19 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    {{ $t("welcome", { name: getName }) }}
+    <div>
+      <template v-for="locale in locales">
+        <button  :key="locale" @click="changeLocale(locale)">
+          {{ locale }}
+        </button>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {
+      locales: ["en", "th"],
+      name: {
+        en: "bas",
+        th: "บาส",
+      },
+    };
+  },
+  computed: {
+    getName() {
+      return this.name[this.getCurrentLocale];
+    },
+    getCurrentLocale() {
+      return this.$i18n.locale;
+    },
+  },
+  methods: {
+    changeLocale(value) {
+      this.$i18n.locale = value
+    }
   }
-}
+};
 </script>
 
 <style>
