@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     {{ $t("welcome", { name: getName }) }}
     <div>
       <template v-for="locale in locales">
@@ -12,8 +13,13 @@
 </template>
 
 <script>
+import Header from '@/components/Header.vue'
+
 export default {
   name: "App",
+  components: {
+    Header
+  },
   data() {
     return {
       locales: ["en", "th"],
@@ -44,8 +50,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
